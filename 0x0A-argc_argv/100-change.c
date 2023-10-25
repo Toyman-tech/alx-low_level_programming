@@ -1,44 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
 
+void isnegative(int);
 /**
- * main - prints the minimum number of coins to
- * make change for an amount of money
- * @argc: number of arguments
- * @argv: array of arguments
+ * main - print minimum number of coin needed to change money
+ * @argc: number of command line parameters passed
+ * @argv: pointer to the parameter passed
  *
- * Return: 0 (Success), 1 (Error)
+ * Return: 0 if success
+ *
+ * Created by: Sanctus-Peter
+ * cc: 22nd July, 2022
  */
+
 int main(int argc, char *argv[])
 {
-	int num, j, result;
-	int coins[] = {25, 10, 5, 2, 1};
+	int count = 0, money;
 
 	if (argc != 2)
 	{
 		printf("Error\n");
-		return (1);
+		exit(EXIT_FAILURE);
 	}
-
-	num = atoi(argv[1]);
-	result = 0;
-
-	if (num < 0)
+	money = atoi(argv[1]);
+	isnegative(money);
+	do {
+		if (money >= 25)
+		{
+			count += money / 25;
+			money %= 25;
+		}
+		else if (money >= 10)
+		{
+			count += money / 10;
+			money %= 10;
+		}
+		else if (money >= 5)
+		{
+			count += money / 5;
+			money %= 5;
+		}
+		else if (money >= 2)
+		{
+			count += money / 2;
+			money %= 2;
+		}
+		else
+		{
+			count += money / 1;
+			money %= 1;
+		}
+	} while (money);
+	printf("%d\n", count);
+	exit(EXIT_SUCCESS);
+}
+/**
+ * isnegative - check if var is negative
+ * @var: variable to be checked
+ */
+void isnegative(int var)
+{
+	if (var < 0)
 	{
 		printf("0\n");
-		return (0);
+		exit(EXIT_FAILURE);
 	}
-
-	for (j = 0; j < 5 && num >= 0; j++)
-	{
-		while (num >= coins[j])
-		{
-			result++;
-			num -= coins[j];
-		}
-	}
-
-	printf("%d\n", result);
-	return (0);
 }

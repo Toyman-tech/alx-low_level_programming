@@ -1,18 +1,25 @@
+#include <stdlib.h>
 #include <stdio.h>
-#include "main.h"
 
 /**
- * main - print the number of arguments passed to the program
- * @argc: number of arguments
- * @argv: array of arguments
+ * main - print number of arguements passed to main
+ * @argc: number of actual parameter passed to main
+ * @argv: pointer to the first element passed to main
  *
- * Return: Always 0 (Success)
+ * Return: success
+ * Created  by: Sanctus-Peter
+ * cc: 22nd July, 2022
  */
 
 int main(int argc, char *argv[])
 {
-(void) argv; /*Ignore argv*/
-	printf("%d\n", argc - 1);
+	int count = 0;
 
-	return (0);
+	while (argc-- > 1)
+		count++;
+
+	(void)(*argv);
+
+	printf("%d\n", count);
+	exit(EXIT_SUCCESS);
 }
